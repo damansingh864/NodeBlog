@@ -6,7 +6,7 @@
         <title>
             <%= name %>
         </title>
-        <meta name="author" content="Damanvir Singh">
+        <meta name="author" content="Damanvir Singh, Avdhesh Datta">
         <link rel="stylesheet" href="/assets/css/font-awesome.css">
         <link rel="stylesheet" href="/assets/css/styles.css">
     </head>
@@ -21,12 +21,7 @@
                                 <div class="leftSection">
                                 </div>
                                 <div class="rightSection">
-                                    <ul class="extraNav">
-                                        <!--<li><a ><i class="fa fa-search" aria-hidden="true">
-                                            <form method="get" action="/search">
-                                                <input type="text" name="search" placeholder="enter text"/>
-                                            </form>
-                                        </i></a>-->
+                                    <ul class="extraNav">                                                                                
                                         <% if( typeof(someAttribute) !== 'undefined' ) { %>
                                             <li><a id="namePerson" href="/enter"><%=someAttribute%></a>
                                                 <ul class="submenu">
@@ -36,7 +31,7 @@
                                                 </ul>
                                             </li>
                                             <li style="display:none"><%=userId%></li>
-                                            <li><a href="logout">Logout</a></li>
+                                            <li><a href="/logout">Logout</a></li>
                                         <%}else{%>
                                         <li><a href="/GettingStarted/#SigningIn" class="signin">Sign in</a></li>
                                         <li class="signUpPage"><a href="/GettingStarted">Get Started</a></li>
@@ -95,7 +90,7 @@
                                     </div>
                             </header>
                             <div class="ArticlesWrapperCtn clearfix">                                
-                                                                                           
+                                   <% if(user.length!=0) { %>                                                        
                                 <% for (var h =0;h<user.length;h++) { %>
                                     <% for(var o = 0; o<user1.length;o++) {%>                                            
                                         <% if (user1[o]._id == user[h].CreatorId)  {%>
@@ -113,7 +108,7 @@
                                             <div class="rightSection">
                                                 <div class="rightSecSupport">
                                                     <a href="/self/<%= user[h]._id %>">
-                                                    <h3 class="head3"><%= user[h].title %></h3>
+                                                    <h3 class="head3"><%- user[h].title %></h3>
                                                     <% var flag = true; %>                                                    
                                                     <% for(var i=0;i<da.length;i++) {%>                                                                                                    
                                                         
@@ -152,86 +147,11 @@
                                     <%}%>
                                 <%}%>
                                 <%}%>                                        
-                                <%}%>                           
-                            <!--
-                                <div class="leftSection Arti2Grp">                            
-                                    <div class="popularArti2 clearfix">
-                                        <div class="leftSection">
-
-                                        </div>
-                                        <div class="rightSection">
-                                            <div class="rightSecSupport">
-                                                <h3>The 4 red flags I missed as the Startup imploaded around me</h3>
-                                                <p>
-                                                    It began in a coffee shop interview and ended in a high-speed motorcycle chase. Come with me if you want your 
-                                                </p>
-                                                <div class="AuthorInfo clearfix">
-                                                    <div class="leftSection authorImage">
-                                                        <div class="authorImageCtn">
-                                                            <img src="/assets/images/mountain1.jpg">
-                                                        </div>
-                                                    </div>
-                                                    <div class="leftSection authorName">
-                                                        <p><a href="#">by Damanvir Singh</a></p>
-                                                        <p>Nov 1</p>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="leftSection Arti1Grp">                            
-                                    <div class="popularArti3 clearfix">
-                                        <div class="leftSection">
-
-                                        </div>
-                                        <div class="rightSection">
-                                            <div class="rightSecSupport">
-                                                <h3>The 4 red flags I missed as the Startup imploaded around me</h3>
-                                                <p>
-                                                    It began in a coffee shop interview and ended in a high-speed motorcycle chase. Come with me if you want your 
-                                                </p>
-                                                <div class="AuthorInfo clearfix">
-                                                    <div class="leftSection authorImage">
-                                                        <div class="authorImageCtn">
-                                                            <img src="/assets/images/mountain1.jpg">
-                                                        </div>
-                                                    </div>
-                                                    <div class="leftSection authorName">
-                                                        <p><a href="#">by Damanvir Singh</a></p>
-                                                        <p>Nov 1</p>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>    
-                                </div>
-                                <div class="leftSection Arti2Grp">                            
-                                    <div class="popularArti4 clearfix">
-                                        <div class="leftSection">
-
-                                        </div>
-                                        <div class="rightSection">
-                                            <div class="rightSecSupport">
-                                                <h3>The 4 red flags I missed as the Startup imploaded around me</h3>
-                                                <p>
-                                                    It began in a coffee shop interview and ended in a high-speed motorcycle chase. Come with me if you want your 
-                                                </p>
-                                                <div class="AuthorInfo clearfix">
-                                                    <div class="leftSection authorImage">
-                                                        <div class="authorImageCtn">
-                                                            <img src="/assets/images/mountain1.jpg">
-                                                        </div>
-                                                    </div>
-                                                    <div class="leftSection authorName">
-                                                        <p><a href="#">by Damanvir Singh</a></p>
-                                                        <p>Nov 1</p>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>  
-                                </div>-->
+                                <%}%>                     
+                                <%} else {%>      
+                                    <p style="font-size:25px;color:#888;text-align:center;font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif">No Articles on <%= name %>.</p>
+                                <%}%>
+                           
                             </div>
                         </div>
                    </div>                   
@@ -240,27 +160,31 @@
                 
             </main>    
             
-            <footer id="mainFooter">
+            <footer id="mainFooter" style="background:#111;">
                 <div class="fixedWidth">
                     <div class="footsWrap">
                         <div class="footerWrapper clearfix">
                             <div class="leftSection">
                                 <ul>
-                                    <li>All rights reserved.</li>
-                                    <li><a href="#">Terms</a></li>
-                                    <li><a href="#">About</a></li>
+                                    <li style="color:white">All rights reserved.</li>
+                                    <li><a href="#" style="color:#aaa">Terms</a></li>
+                                    <li><a href="#" style="color:#aaa">About</a></li>
                                 </ul>
                             </div>
                             <div class="rightSection">
                                 <ul>
-                                    <li><a href="https://www.facebook.com"><i class="fa fa-facebook-square" aria-hidden="true"></i></a></li>
-                                    <li><a href="https://www.twitter.com"><i class="fa fa-twitter-square" aria-hidden="true"></i></a></li>
-                                    <li><a href="https://www.youtube.com"><i class="fa fa-youtube-square" aria-hidden="true"></i></a></li>
-                                    <li><a href="https://www.instagram.com"><i class="fa fa-instagram" aria-hidden="true"></i></a></li>
-                                    <li><a href="https://www.plus.google.com"><i class="fa fa-google-plus-square" aria-hidden="true"></i></a></li>
+                                    <li><a style="color:#444;" href="https://www.facebook.com"><i class="fa fa-facebook-square" aria-hidden="true"></i></a></li>
+                                    <li><a style="color:#444;" href="https://www.twitter.com"><i class="fa fa-twitter-square" aria-hidden="true"></i></a></li>
+                                    <li><a style="color:#444;" href="https://www.youtube.com"><i class="fa fa-youtube-square" aria-hidden="true"></i></a></li>
+                                    <li><a style="color:#444;" href="https://www.instagram.com"><i class="fa fa-instagram" aria-hidden="true"></i></a></li>
+                                    <li><a style="color:#444;" href="https://www.plus.google.com"><i class="fa fa-google-plus-square" aria-hidden="true"></i></a></li>
                                 </ul>
                             </div>
-                            <div class="centerLogo">logo</div>
+                            <div class="centerLogo">                                
+                                <div class="logoCtn" style="text-align:center; z-index:10">
+                                    <a href="/"><h1 style="height:35px; width:100px;margin:0 auto;"><img src="/assets/images/logo.png" style="width:100%;height:35px;"></h1></a>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>

@@ -4,9 +4,9 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>
-            
+            <%=someAttribute%> Profile
         </title>
-        <meta name="author" content="Damanvir Singh">
+        <meta name="author" content="Damanvir Singh, Avdhesh Datta">
         <link rel="stylesheet" href="/assets/css/font-awesome.css">
         <link rel="stylesheet" href="/assets/css/styles.css">
         <script src="/assets/script/jquery-3.2.1.min.js"></script>
@@ -22,12 +22,7 @@
                                     <div class="leftSection">
                                     </div>
                                     <div class="rightSection">
-                                        <ul class="extraNav">
-                                            <!--<li><a ><i class="fa fa-search" aria-hidden="true">
-                                                <form method="get" action="/search">
-                                                    <input type="text" name="search" placeholder="enter text"/>
-                                                </form>
-                                            </i></a>-->
+                                        <ul class="extraNav">                                            
                                             <% if( typeof(someAttribute) !== 'undefined' ) { %>
                                                 <li><a id="namePerson" href="/enter"><%=someAttribute%></a>
                                                     <ul class="submenu">
@@ -35,16 +30,14 @@
                                                         <li><a href="/profile">Edit Your Profile</a></li>
                                                         <li><a href="/blog/<%= userId %>">Your Stories</a></li>
                                                     </ul>
-                                                </li>
-                                                <li style="display:none"><%=userId%></li>
-                                                <li><a href="logout">Logout</a></li>
+                                                </li>                                                
+                                                <li><a href="/logout">Logout</a></li>
                                             <%}else{%>
                                             <li><a href="GettingStarted/#SigningIn" class="signin">Sign in</a></li>
                                             <li class="signUpPage"><a href="GettingStarted">Get Started</a></li>
                                             <%}%>
                                         </ul>
-                                    </div>                                
-    
+                                    </div>                                    
                                     <div class="logoCtn" style="text-align:center">
                                             <a href="/"><h1 style="height:35px; width:100px;margin:0 auto;"><img src="/assets/images/logo.png" style="width:100%;height:35px;"></h1></a>
                                     </div>
@@ -69,12 +62,12 @@
                 </header><!-- ********* Header *********** -->
 
             <main>
-                <article style="width:740px; margin:0 auto;">
+                <article style="width:740px; margin:0 auto;height:400px">
                     <div class="profileWrapper">
                         <div class="profileDataWrapper">
                             <header class="headerWrapperProfile clearfix">
                                 <div class="leftSection">
-                                    <h1 class="nameProfilePerson"><%= someAttribute %></h1>
+                                    <h1 class="nameProfilePerson"><%= userName %></h1>
                                     <p class="bioProfilePerson"><% if (typeof(bio) !== 'undefined' ) {%><%=bio%><%}%></p>
                                 </div>
                                 <div class="rightSection clearfix">
@@ -86,8 +79,7 @@
                                             <button type="button" id="uploadBtnWrap" title="Upload an Image"><i style=" color:#aaa; opacity:.6" class="fa fa-2x fa-camera" aria-hidden="true"></i></button>
                                             <input type="file" id="imageProfUpl" accept="image/*" title="Upload an Image" style="display:none">
                                             
-                                        </div>
-                                       
+                                        </div>                                       
                                     </div>
                                 </div>
                             </header>
@@ -116,14 +108,11 @@
                                             bio:bioPerson,
                                             imageId:ImagePers
                                         }),                               
-                                        contentType:'application/json',                          
-                                        //enctype: 'multipart/form-data',
+                                        contentType:'application/json',                                                                  
                                         url: 'http://localhost:3000/update',                            
                                         success: function(data)
-                                        {
-                                 
-                                            location.reload();
-                                            console.log("Working");
+                                        {                                 
+                                            location.reload();                                            
                                         }
                                     });
                                 
@@ -136,23 +125,23 @@
                                 var SaveWrapper = document.querySelector("#SaveAndCancelWrapper");
                                 var UploadProfileImage = document.querySelector(".buttonUploadProfileImage");
                                 var NamePerson = document.querySelector(".nameProfilePerson");
+                                
                                 var BioPerson = document.querySelector(".bioProfilePerson");
                                 var PrfImgPrev = document.querySelector("#PrfImagePrev");
                                 var imgPrev = PrfImgPrev.getAttribute("src");
-                                
-                                console.log("da");
+                                                                
                                 var Persons,Bio;
                                 EditBtn.addEventListener("click", function() {                                    
-                                    Persons = NamePerson.innerHTML;
-                                    Bio = BioPerson.innerHTML;
-                                    NamePerson.innerHTML = "<input type='text' id='pers' value="+Persons+">";
-                                    BioPerson.innerHTML = "<textarea id='textBio' autofocus style='width:100%;height:60px'>"+Bio+"</textarea>";                                    
+                                
+                                    Persons = NamePerson.textContent;
+                                    Bio = BioPerson.innerHTML;                                    
+                                    NamePerson.innerHTML = "<input type='text' id='pers' value='"+ Persons +"'>";
+                                    BioPerson.innerHTML = "<textarea id='textBio' autofocus style='width:100%;height:60px' placeholder='Enter Your Bio'>"+Bio+"</textarea>";                                    
                                     EditWrapper.style.display="none";
                                     SaveWrapper.style.display="block";
                                     UploadProfileImage.style.display="block";
                                 });
-                                var CancelBtn =  document.querySelector("#CancelBtnProfile");
-                                
+                                var CancelBtn =  document.querySelector("#CancelBtnProfile");                                
 
                                 CancelBtn.addEventListener("click", function() {
                                     NamePerson.innerHTML = Persons;
@@ -169,27 +158,31 @@
                 </article>                
             </main>    
             
-            <footer id="mainFooter">
+            <footer id="mainFooter" style="background:#111;">
                 <div class="fixedWidth">
                     <div class="footsWrap">
                         <div class="footerWrapper clearfix">
                             <div class="leftSection">
                                 <ul>
-                                    <li>All rights reserved.</li>
-                                    <li><a href="#">Terms</a></li>
-                                    <li><a href="#">About</a></li>
+                                    <li style="color:white">All rights reserved.</li>
+                                    <li><a href="#" style="color:#aaa">Terms</a></li>
+                                    <li><a href="#" style="color:#aaa">About</a></li>
                                 </ul>
                             </div>
                             <div class="rightSection">
                                 <ul>
-                                    <li><a href="https://www.facebook.com"><i class="fa fa-facebook-square" aria-hidden="true"></i></a></li>
-                                    <li><a href="https://www.twitter.com"><i class="fa fa-twitter-square" aria-hidden="true"></i></a></li>
-                                    <li><a href="https://www.youtube.com"><i class="fa fa-youtube-square" aria-hidden="true"></i></a></li>
-                                    <li><a href="https://www.instagram.com"><i class="fa fa-instagram" aria-hidden="true"></i></a></li>
-                                    <li><a href="https://www.plus.google.com"><i class="fa fa-google-plus-square" aria-hidden="true"></i></a></li>
+                                    <li><a style="color:#444;" href="https://www.facebook.com"><i class="fa fa-facebook-square" aria-hidden="true"></i></a></li>
+                                    <li><a style="color:#444;" href="https://www.twitter.com"><i class="fa fa-twitter-square" aria-hidden="true"></i></a></li>
+                                    <li><a style="color:#444;" href="https://www.youtube.com"><i class="fa fa-youtube-square" aria-hidden="true"></i></a></li>
+                                    <li><a style="color:#444;" href="https://www.instagram.com"><i class="fa fa-instagram" aria-hidden="true"></i></a></li>
+                                    <li><a style="color:#444;" href="https://www.plus.google.com"><i class="fa fa-google-plus-square" aria-hidden="true"></i></a></li>
                                 </ul>
                             </div>
-                            <div class="centerLogo">logo</div>
+                            <div class="centerLogo">                                
+                                <div class="logoCtn" style="text-align:center; z-index:10">
+                                    <a href="/"><h1 style="height:35px; width:100px;margin:0 auto;"><img src="/assets/images/logo.png" style="width:100%;height:35px;"></h1></a>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -203,7 +196,7 @@
 
                 fileUp.addEventListener("click", function () {                                
                         sd.click();                            
-                        console.log("click");                                
+                        
                 });
                 sd.addEventListener("change", function() {
                     var curFiles = sd.files;                                                                                                         
@@ -213,8 +206,7 @@
                             if(validFileType(curFiles[i])) {                  
                 
                                 reader.onload = function()
-                                {                                                            
-                                    
+                                {                                                                                                
                                     PrfPrev.src=reader.result                                                                                                                                                                                                    
                                 }
                                 reader.readAsDataURL(curFiles[i]);             
@@ -229,7 +221,7 @@
                     for(var i = 0; i < fileTypes.length; i++) {
                         if(file.type === fileTypes[i]) {
                             return true;
-                        }
+                        } 
                     }
                     return false;
                 }    

@@ -4,9 +4,9 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>
-            Edit the Blog
+            Create Your Blog
         </title>
-        <meta name="author" content="Damanvir Singh">
+        <meta name="author" content="Damanvir Singh, Avdhesh Datta">
         <link rel="stylesheet" href="/assets/css/font-awesome.css">
         <link rel="stylesheet" href="/assets/css/styles.css">
         <script src="/assets/script/jquery-3.2.1.min.js"></script>
@@ -39,11 +39,6 @@
                                     </div>
                                     <div class="rightSection">
                                         <ul class="extraNav">
-                                            <!--<li><a ><i class="fa fa-search" aria-hidden="true">
-                                                <form method="get" action="/search">
-                                                    <input type="text" name="search" placeholder="enter text"/>
-                                                </form>
-                                            </i></a>--></li>
                                             <% if( typeof(someAttribute) !== 'undefined' ) { %>
                                                 <li><a id="namePerson" href="/enter"><%=someAttribute%></a>
                                                     <ul class="submenu">
@@ -53,7 +48,7 @@
                                                     </ul>
                                                 </li>
                                                 <li style="display:none"><%=userId%></li>
-                                                <li><a href="logout">Logout</a></li>
+                                                <li><a href="/logout">Logout</a></li>
                                             <%}else{%>
                                             <li><a href="GettingStarted/#SigningIn" class="signin">Sign in</a></li>
                                             <li class="signUpPage"><a href="GettingStarted">Get Started</a></li>
@@ -103,247 +98,150 @@
                         <section>
                             <div class="sectionContent">
                                 <div class="section-inner sectionLayout--insertColumn">
-                                    <h3 class="graf-title" type="1"><br></h3>                                    
-                                    
-                                    <!--<h3 class="sectionTitle" type="1">About JioPhone</h3>
-                                    <figure contenteditable="false">
-                                        <div class="">
-                                            <img src="">                                            
-                                        </div>
-                                        <figcaption>
-
-                                        </figcaption>
-                                    </figure>
-                                    <p class="after--figure">Jio Phone is out of the huge demand in India.</p>
-                                    <p class="after--p" onmouseup="foo();">Jio Phone is out of the huge demand in India.</p>-->
+                                    <h3 class="graf-title" type="1"><br></h3>                                                               
                                 </div>
                             </div>
                         </section>
-                    </div>
-                  <!--  <div class="">
-                        <button type="button" id="btnsUplo" style="width:50px;height:50px;border-radius:50%;background:white;border:1px solid #ccc;">Fi</button>
-                        <input type="file" accept="image/*" name="imgs" id="mgsi">
-                    </div>-->
+                    </div>                  
                     
                     <div id="chos" style="height:30px; width:auto; position:absolute;border-right:1px solid rgba(0,0,0,.15);top:0;left:0;display:show">
                         <span style="font-size:16px; letter-spacing:1px;color:#ccc;padding-top:24px;margin-right:15px;display:block;width:100%">Title</span>
                     </div>
-                    <div id="optios" style="height:30px; width:auto; position:absolute;top:-5px;left:0;display:none">
-                        <!--<form method="POST" action="/endpoint" enctype="multipart/form-data">-->
-                            <button type="button" id="btnsUplo" style="width:auto;height:30px;border-radius:10%;background:white;border:1px solid #ccc;"><i style="font-size:20px; color:#555" class="fa fa-x fa-camera" aria-hidden="true"></i></button>
-                            <input type="file" accept="image/*" name="imgs" id="mgsi" style="display:none;position:absolute;">
-                            <!--<button type="submit" id="btnsub">Submit</button>
-                        </form>-->
-                            <!--<label for="image_uploads">Choose images to upload (PNG, JPG)</label>
-                            <input type="file" id="image_uploads" name="image_uploads" accept="image/*">-->
+                    <div id="optios" style="height:30px; width:auto; position:absolute;top:-5px;left:0;display:none">                        
+                        <button type="button" id="btnsUplo" style="width:auto;height:30px;border-radius:10%;background:white;border:1px solid #ccc;"><i style="font-size:20px; color:#555" class="fa fa-x fa-camera" aria-hidden="true"></i></button>
+                        <input type="file" accept="image/*" name="imgs" id="mgsi" style="display:none;position:absolute;">                        
                     </div>
+                                                
                     <script>
-                            var fileUp = document.querySelector("#btnsUplo");                                                
-                            var sd = document.querySelector("#mgsi");
-                            //var preview = document.querySelector('.preview');
+                        var fileUp = document.querySelector("#btnsUplo");                                                
+                        var sd = document.querySelector("#mgsi");                                                    
+                        fileUp.addEventListener("click", function () {                                
+                            sd.click();                            
+                                                         
+                        });
+                        sd.addEventListener("change", function() {                                    
+                                var curFiles = sd.files;                                                                                                         
                             
-                            fileUp.addEventListener("click", function () {                                
-                                sd.click();                            
-                                console.log("click");                                
-                            });
-                            sd.addEventListener("change", function() {                                    
-                                    var curFiles = sd.files;                                                                                                         
-                                    console.log(sd.files);
-                                    for(var i = 0; i < curFiles.length; i++) {                                                                                                 
-                                        var figure = document.createElement('figure');     
-                                        var image = document.createElement('img');                                
-                                        var getss = document.querySelector(".isSelected");
-                                        var reader = new FileReader();
-                                        if(validFileType(curFiles[i])) {                  
-                                            
-                                            reader.onload = function()
-                                            {
-                                            
-                                            
- 
+                                for(var i = 0; i < curFiles.length; i++) {                                                                                                 
+                                    var figure = document.createElement('figure');     
+                                    var image = document.createElement('img');                                
+                                    var getss = document.querySelector(".isSelected");
+                                    var reader = new FileReader();
+                                    if(validFileType(curFiles[i])) {                                                              
+                                        reader.onload = function()
+                                        {                                            
                                             var sp2 = getss.parentNode;
                                             sp2.insertBefore(figure,getss);
-                                            //sp2.removeChild(getss);
-                                            figure.setAttribute("data-figure",true);
-                                            //figure.setAttribute("class","isSelected");
+                                            figure.setAttribute("data-figure",true);                                            
                                             figure.setAttribute("contenteditable",false);
-                                            image.src=reader.result
-                                            //image.src = window.URL.createObjectURL(curFiles[i]);                                            
-                                            //var blob = image.src.replace(":http://localhost:3000/",":");
+                                            image.src=reader.result;
                                             image.setAttribute("data-imageName",image.src);
                                             image.setAttribute("style","width:100%;");                                                                               
                                             figure.appendChild(image);
-                                            }
-                                        reader.readAsDataURL(curFiles[i]);             
-                                        }
-                                    }                                        
-                                    function validFileType(file) {
-                                        var fileTypes = [
-                                            'image/jpeg',
-                                            'image/pjpeg',
-                                            'image/png'
-                                        ];
-                                        for(var i = 0; i < fileTypes.length; i++) {
-                                            if(file.type === fileTypes[i]) {
-                                               return true;
+                                            image.onload = function () {
+                                                var nextSib = figure.nextSibling;                                                                                                               
+                                                var TopOffset = nextSib.offsetTop;
+                                                var LeftOffset = nextSib.offsetLeft;                                                    
+                                                var optios = document.querySelector("#optios");                                                                   
+
+                                                optios.style.display="block";
+                                                optios.style.left = LeftOffset-55 +"px";
+                                                optios.style.top = TopOffset+"px";       
+                                                nextSib.focus();    
+                                                window.scrollTo(0,document.querySelector(".ged").scrollHeight);
                                             }
                                         }
-                                        return false;
-                                    }    
-                                });                                                            
-                           // var reader = new FileReader();    
-                            //reader.onload = (function(aImg)
-                             //{ return function(e) { aImg.src = e.target.result; }; })(img);    
-                    //reader.readAsDataURL(file);                            
-                        </script>
+                                    reader.readAsDataURL(curFiles[i]);             
+                                    }
+                                }                                        
+                                function validFileType(file) {
+                                    var fileTypes = [
+                                        'image/jpeg',
+                                        'image/pjpeg',
+                                        'image/png'
+                                    ];
+                                    for(var i = 0; i < fileTypes.length; i++) {
+                                        if(file.type === fileTypes[i]) {
+                                            return true;
+                                        }
+                                    }
+                                    return false;
+                                }    
+                            });                                                                                       
+                    </script>                                            
                     <script>
-                        /*var input = document.querySelector('#image_uploads');
-                        var preview = document.querySelector('.preview');
-
-                        input.style.opacity = 0;
-
-                        input.addEventListener('change', updateImageDisplay);
-
-                        function updateImageDisplay() {                            
-                             var curFiles = input.files;                                                                                                                    
-                            for(var i = 0; i < curFiles.length; i++) {         
-
-                                var image = document.createElement('img');                                
-                                image.src = window.URL.createObjectURL(curFiles[i]);
-                                image.setAttribute("style","width:100%;");
-                                preview.appendChild(image);                                                    
-                            }
-                        }                        */
-                        
-                    </script>
-                    <script>
-
                         var c = document.querySelector(".section-inner");   
                         var nextSiblings, previousSiblings,TopOffset,LeftOffset,HeightNF;
                         function getPosition() {
                                     if (window.getSelection) {
-                                        sel = window.getSelection();
-                                        console.log(sel);
-                                         nextSiblings= sel.focusNode.nextElementSibling;
+                                        sel = window.getSelection();                            
+                                        nextSiblings= sel.focusNode.nextElementSibling;
                                         previousSiblings = sel.focusNode.previousElementSibling;                                        
-                                         TopOffset = sel.focusNode.offsetTop;
-                                         LeftOffset = sel.focusNode.offsetLeft;
+                                        TopOffset = sel.focusNode.offsetTop;
+                                        LeftOffset = sel.focusNode.offsetLeft;
                                          if(previousSiblings.tagName.toLowerCase() == "h3") {
                                             sel.focusNode.setAttribute("data-subtitle",true);
                                          } else {
-                                            sel.focusNode.setAttribute("data-subtitle",false);                                            
-                                            console.log(previousSiblings.className);
-                                          
+                                            sel.focusNode.setAttribute("data-subtitle",false);                                                                                        
                                          }
-                                         var e = previousSiblings.className.replace("isSelected","");                                             
-                                            previousSiblings.className = e;
-                                          sel.focusNode.className="graf-p graf-after-"+previousSiblings.tagName+" isSelected";
-                                         sel.focusNode.tabIndex = 2;
-                                         HeightNF = sel.focusNode.offsetHeight;
-                                        if (sel.getRangeAt) {
-                                            console.log(sel.getRangeAt(0));
+                                                                                                                         
+                                        var e = previousSiblings.className.replace("isSelected","");                                             
+                                        previousSiblings.className = e;
+                                        sel.focusNode.className="graf-p graf-after-"+previousSiblings.tagName+" isSelected";
+                                        sel.focusNode.tabIndex = 2;
+                                        HeightNF = sel.focusNode.offsetHeight;
+                                        if (sel.getRangeAt) {                                        
                                             return sel.getRangeAt(0).startOffset;
                                         }
                                     }
                                     return null;
                                 }                                                                                                        
 
-                        function works(event) {
-                            if(event.keyCode == 13) {
-                                document.execCommand('formatBlock', false, 'p');
-                                console.log(getPosition());    
-                                if(getPosition() == 0) {
-                                    var optios = document.querySelector("#optios");                                                                   
-                                    optios.style.display="block";
-                                    optios.style.left = LeftOffset-55 +"px";
-                                    optios.style.top = TopOffset+"px";                                                                                                                                                                        
-                                   // optios.style.height = HeightNF + "px";
-                                    console.log(HeightNF);                      
-                                    var editable = document.querySelector(".isSelected");
-editable.addEventListener('input', function() {
-    console.log('Hey, somebody changed something in my text!');
-});               
+                            function works(event) {                            
+                                if(event.keyCode == 13 ) {
+                                    window.scrollTo(0,document.querySelector(".ged").scrollHeight);
+                                    document.execCommand('formatBlock', false, 'p');                                
+                                    if(getPosition() == 0) {
+                                        var optios = document.querySelector("#optios");                                                                   
+                                        optios.style.display="block";
+                                        optios.style.left = LeftOffset-55 +"px";
+                                        optios.style.top = TopOffset+"px";                                                                                                                                                                                                                                               
+                                    }
+                                } else {
+                    
                                 }
-                            } else {
-                    
-                            }
-                        }
+                            }                            
+                        </script>
+                        <script>
+                            var o  = document.querySelector(".graf-title");                        
+                            var chos = document.querySelector("#chos");                                            
+                            var oHeight = o.offsetHeight;
+                            var widthChos = chos.offsetWidth;
+                            chos.style.left = o.offsetLeft -(widthChos+5) +"px";
+                            chos.style.top = o.offsetTop+"px";                                                                                                                                                                        
+                            chos.style.height = oHeight + "px";
+                        </script>                                                                             
+                    </article>                
+                </main>    
+                <div style="position:fixed;left:0;right:0;height:80px;bottom:0;border-top:1px solid #ddd;background:white;z-index:20">                
+                    <div style="width:740px;height:100%; margin:0 auto;padding:25px 0px 0px; text-align:right;">
+                        <select name="tags" id="tags" required>
+                            <option value="" Disabled selected>Select Your Tags</option>
+                            <option value="Technology">Technology</option>
+                            <option value="Creativity">Creativity</option>
+                            <option value="Entrepreneurship">Entrepreneurship</option>
+                            <option value="stories">Real Stories</option>
+                            <option value="design">Digital Designs</option>
+                        </select>
 
-                        
-
-                        for(var i = 0; i<c.children.length;i++) {
-                            
-                            if(c.children[i].tagName.toLowerCase()=="p") {                                
-                                console.log(i+ " : " +  c.children[i].tagName);
-                            } 
-
-                        }
-
-                         /*var c = document.querySelector(".section-inner");
-                        function ente(e) {
-                            
-                            if(e.keyCode == 13) {
-                                //var o = c.children[c.childElementCount-1];
-
-                                console.log();
-                                //console.log(o.tagName);
-                                
-                            }
-                        }*/
-            
-                    </script>
-                    <script>
-                        var o  = document.querySelector(".graf-title");                        
-                        var chos = document.querySelector("#chos");                                            
-                        var oHeight = o.offsetHeight;
-                        var widthChos = chos.offsetWidth;
-                        chos.style.left = o.offsetLeft -(widthChos+5) +"px";
-                        chos.style.top = o.offsetTop+"px";                                                                                                                                                                        
-                        chos.style.height = oHeight + "px";
-                    </script>
-
-                   
-                                      
-                    <script>
-                        function foo() {
-                            var selObj = window.getSelection(); 
-                            alert(selObj);
-                            var selRange = selObj.getRangeAt(0);
-                            // do stuff with the range
-                        }
-                        
-                    </script>
-
-                        <!---<p id="txt_inp1" style="height:200px; width:80%; margin:0 auto; border:1px solid #ccc;"></p>
-                    <p id="txt_inp" style="height:200px; width:80%; margin:0 auto; border:1px solid #ccc;"></p>
-                    <form name="form1" style=" width:80%; margin:0 auto; border:1px solid #ccc;"> 
-                        <input type="text" style="width:100%;height:auto; padding:5px;font-size:20px; font-family:'verdana'; border:0px;" onkeyup="daman()" id="dtt" name="datText" value="" placeholder="Enter data " onkeypress="fcs(event)">
-                        <input type="submit" value="submit" id="sbm">
-                    </form>-->
-                    
-                </article>                
-            </main>    
-            <div style="position:fixed;left:0;right:0;height:80px;bottom:0;border-top:1px solid #ddd;background:white;z-index:20">                
-                <div style="width:740px;height:100%; margin:0 auto;padding:25px 0px 0px; text-align:right;">
-                    <select name="tags" id="tags" required>
-                        <option value="" Disabled selected>Select Your Tags</option>
-                        <option value="Technology">Technology</option>
-                        <option value="Creativity">Creativity</option>
-                        <option value="Entrepreneurship">Entrepreneurship</option>
-                        <option value="stories">Real Stories</option>
-                        <option value="design">Digital Designs</option>
-                    </select>
-
-                    <button type="submit" onclick="das(event)" data-publish="publish" style="background:#218432;color:white;border:0px;padding:8px 22px;border-radius:2px; font-size:12px; font-family:verdana,sans-serif;text-transform:uppercase;letter-spacing:.4px;">Publish</button>
+                        <button type="submit" onclick="das(event)" data-publish="publish" style="background:#218432;color:white;border:0px;padding:8px 22px;border-radius:2px; font-size:12px; font-family:verdana,sans-serif;text-transform:uppercase;letter-spacing:.4px;">Publish</button>
+                    </div>
                 </div>
-            </div>
-            <script>
-              
+                <script>              
                 function das(e) {
                     e.preventDefault();
                     var as = `<%= someAttribute %>`;      
-                   var am = `<%= userId %>`;
-                    console.log(am);
+                   var am = `<%= userId %>`;                    
                     var titles = document.querySelector("h3.graf-title").innerHTML;
                     var date = new Date();            
                     var sec = document.querySelector(".section-inner");
@@ -351,9 +249,9 @@ editable.addEventListener('input', function() {
                     if(tags == '') {
                         alert("Please Select valid Tags");
                     } else {
-                    console.log(tags);                    
-                    var dataIt = [];        
-                    var serd ='';
+                    
+                        var dataIt = [];        
+                        var serd ='';
                     for(var i=0;i<sec.children.length;i++) {
                         var tagsName = sec.children[i].tagName.toLowerCase();
                         var tagContent = sec.children[i].innerHTML;
@@ -365,14 +263,11 @@ editable.addEventListener('input', function() {
                             subtitles = true;
                         }
                         if(sec.children[i].dataset.figure) {
-                            figures=true;
-                            //imageId =  sec.children[i].children[0].getAttribute("src");
-                            imageId=sec.children[i].children[0].getAttribute("data-imageName");
-                            //serd = sec.children[i].children[0].getAttribute("data-imageName");
+                            figures=true;                    
+                            imageId=sec.children[i].children[0].getAttribute("data-imageName");                    
                             tagContent="";
                             
-                        }
-                        console.log(tagsName+ " "+ tagContent);
+                        }                        
                     var one =[{                                                                                        
                             tag:tagsName,
                             tagContent:tagContent,
@@ -394,72 +289,33 @@ editable.addEventListener('input', function() {
                         imgFet="/assets/images/"+tags.toLowerCase()+".png";
                     }
                     
-                var data = {CreatorId:`<%= userId %>`,
-                            CreatingDate: date,
-                            tags:tags.toLowerCase(),                            
-                            title:titles,
-                            featuresImage:imgFet,
-                            content:{                                        
-                                bodyModel: {
-                                    dataIt
-                                }
-                                //bodyModel:{
-                                    //htmlContent: 
-                                        //dataIt                                                                                       
-                                //}                                    
-                            }                                
-                        }; //Array  
-                        
-/*                        document.querySelector("#btnsub").click(function(e){                        
-                    return false;
-                });                                       */
-                $.ajax({
-                    type: 'POST',
-                    data: JSON.stringify(data),                               
-                    contentType:'application/json',                          
-                    //enctype: 'multipart/form-data',
-                    url: 'http://localhost:3000/endpoint',                            
-                    success: function(data)
-                    {
-                        //data - response from server
+                    var data = {CreatorId:`<%= userId %>`,
+                                CreatingDate: date,
+                                tags:tags.toLowerCase(),                            
+                                title:titles,
+                                featuresImage:imgFet,
+                                content:{                                        
+                                    bodyModel: {
+                                        dataIt
+                                    }
+                            
+                                }                                
+                            };
+                            
+                    $.ajax({
+                        type: 'POST',
+                        data: JSON.stringify(data),                               
+                        contentType:'application/json',                                              
+                        url: 'http://localhost:3000/endpoint',                            
+                        success: function(data)
+                        {                                                    
+                            window.location=window.location.origin + data;                     
+                        }
+                    });
                 
-                    
-                window.location=window.location.origin + data;
-                console.log("Working");
-
-                    }
-                });
-            
-            }
+                }
             };
-            </script>
-            <script>                   
-                    /*var txtAre = document.querySelector("#dtt");   
-                    var as = document.querySelector("#sbm");
-                    var a = document.querySelector("#txt_inp");
-                    var d = document.querySelector("#txt_inp1");
-                function daman() {            
-                    a.innerHTML = txtAre.value;
-                    
-                }
-                function fcs(e) {
-                        if(e.keyCode==13) {
-                            alert("KEy is Enter");
-                        }
-                    }
-                as.addEventListener("click", function(e) {
-                    e.preventDefault();
-                    alert(txtAre.value);
-                    alert(a.innerHTML);
-                        a.innerHTML += txtAre.value;
-                        txtAre.value ="";
-                }); 
-                d.onselect = function() {
-                    alert("Daman");
-                }
-                */ 
-            </script>
-
+            </script>            
             <footer id="mainFooter">
                 <div class="fixedWidth">
                     <div class="footsWrap">

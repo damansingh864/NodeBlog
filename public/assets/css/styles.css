@@ -1,6 +1,6 @@
 /*********************************
 *
-*   Created By - Damanvir Singh
+*   Created By - Damanvir Singh, Avdhesh Datta
 *   Created On - 8:00PM
 *   Created At - 3 Nov 2017
 *
@@ -75,6 +75,8 @@ a {
 
 .popularArticlesWrapper {
     padding:20px 0px;
+    min-height:300px;
+    margin-bottom:30px;
 }
 
 /*********** Floating Styles *************/
@@ -119,7 +121,7 @@ a {
 
 #mainHeader {
     min-height:50px;
-    border-bottom:1px solid rgba(150,150,150,.3);
+    border-bottom:1px solid rgba(150,150,150,.1);
 }
 
 .headsWrap {       
@@ -132,13 +134,11 @@ a {
 }
 
 .logoCtn {
+    widows: 20%;
+    margin:0 auto;
     position:absolute;
-    top:0;
-    left:0;
-    width:100%;
-    height:auto;
-    text-align: center;
-    z-index:-1;
+    left:50%;
+    transform:translateX(-50%);
 }
 
 
@@ -159,8 +159,8 @@ a {
 #introArticles .leftSection > div {
     width:100%;
     position:relative;
-    border:1px solid #555;   
-    border-radius:2 px;
+    border:0px solid #555;   
+    border-radius:2px;
     background-size:auto 100%;
     background-position:center;
     background-repeat:no-repeat; 
@@ -168,37 +168,37 @@ a {
 
 .firstTop {
     height:65%;
-    background-image:url('/assets/images/mountain3.jpg');       
+    background-image:url('/assets/images/stories.png');       
 }
 
 .firstBottom {
     height:35%;
-    background-image:url('/assets/images/mountain1.jpg');    
+    background-image:url('/assets/images/crt.jpg');    
 }
 
 .secondTop {
     height:45%;
-    background-image:url('/assets/images/mountain5.jpg'); 
+    background-image:url('/assets/images/open.jpg'); 
 }
 
 .secondBottom {
     height:55%;
-    background-image:url('/assets/images/mountain6.jpg'); 
+    background-image:url('/assets/images/entreneurship.png'); 
 }
 
 .thirdTop {
     height:60%;
-    background-image:url('/assets/images/mountain7.jpg'); 
+    background-image:url('/assets/images/tech.jpg'); 
 }
 
 .thirdBottom {
     height:40%;
-    background-image:url('/assets/images/mountain9.jpg'); 
+    background-image:url('/assets/images/succ1.jpg'); 
 }
 
 .fullArticleSec {
     height:100%;
-    background-image:url('/assets/images/mountain8.jpg'); 
+    background-image:url('/assets/images/space.jpg'); 
 }
 
 /***** Popular Articles ******/
@@ -603,6 +603,17 @@ a {
     margin-top:35px;
 }
 
+.getConnectCtn .rightSection {
+    background:url('/assets/images/back.png');
+    background-size:50% 100%;
+    background-repeat: no-repeat;
+    background-position:center;
+}
+
+.getConnectBtn a button:hover {
+    cursor:pointer;
+}
+
 .btnT1 {
     border:1px solid #111;
     background:#111;
@@ -638,7 +649,7 @@ a {
     width:100%;
     height:100%;
     position:relative;    
-    border-top:1px solid rgba(150,150,150,.3);
+    border-top:0px solid rgba(150,150,150,.3);    
 }
 
 .footerWrapper {
@@ -680,10 +691,6 @@ a {
     margin-left:25px;
 }
 
-.signUpPage {
- 
-}
-
 .signin {
     color:rgba(100,100,100,.45);
 }
@@ -703,11 +710,12 @@ a {
     padding:5px 10px;
     border-radius:5px;    
     background:#00a3e3;
+    color:white !important;
 }
 
 
 .signUpPage a:hover{
-    color:#00a3e3;
+    color:#00a3e3 !important;
     background:white;   
 }
 
@@ -789,45 +797,52 @@ h3.graf-title {
     position:relative;
 }
 
+
 ul.submenu {
     top:10px;
     width:140px;
-    position:absolute;
-    
+    position:absolute;    
     z-index:20;
-    left:-99999em;
-    
+    left:-99999em;    
     overflow:hidden;
-    padding-top:20px;
+    padding-top:20px;    
 }
 
 #namePerson {
     width:20px;
     overflow:hidden;    
     height:20px;
-}
-#namePerson img {
-    width:100%;
-    height:20px;
+    color:#00a3e3;    
 }
 
 ul.submenu li {
-    border-radius:3px;
-    border:1px solid #eee;
     background:white;    
     margin-left:0px;
     width:100%;
+    border-bottom:0px;
+}
+ul.extraNav li a {
+    color:#888;
 }
 
 ul.submenu li a {    
+    border:1px solid #f9f9f9;
     padding:10px 5px 10px 15px;
-    border-bottom:1px solid #eee;
+    color:#00a3e3;
     display:block;
-    width:100%;
+    width:100%;    
+    font-size:10px;
+    
 }
-ul.submenu li:last-child a {
-    border:0;
+ul.submenu li:last-child a { 
+    border-bottom:1px solid #f9f9f9;
 }
+
+ul.submenu li a:hover {
+    background:#00a3e3;
+    color:white;
+}
+
 
 ul.extraNav li:hover ul.submenu {
     left:-5px;
@@ -1049,4 +1064,39 @@ figure.graf-image {
 .ContentCtnProf {
     margin-bottom:10px;
     border-bottom:0;
+}
+
+.introCo {
+    border:0px solid black;
+    position:absolute;
+    top:50%;
+    left:50%;
+    width:auto;
+    height:auto;
+    transform:translate(-50%,-50%);
+}
+
+.introCo h1 {
+    font-size:53px;
+    font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    color:white;
+    text-shadow:2px 2px 0px #777;
+    
+}
+
+.introImageWrap {
+    background:url('/assets/images/logo.png');
+    height:200px;
+    width:500px;
+    margin:0 auto;
+    background-size:100% 100%;
+}
+
+.introArtCt h3 {
+    text-transform:uppercase;
+    font-size:18px;
+    color:white;
+    font-family:-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    letter-spacing: 1px;
+    
 }

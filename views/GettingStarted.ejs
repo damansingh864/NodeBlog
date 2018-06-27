@@ -4,12 +4,14 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>
-            Blogging Sites
+            Getting Started Hey Bloggers
         </title>
-        <meta name="author" content="Damanvir Singh">
+        <meta name="author" content="Damanvir Singh, Avdhesh Datta">
         <link rel="stylesheet" href="/assets/css/font-awesome.css">
         <link rel="stylesheet" href="/assets/css/styles.css">
         <link rel="stylesheet" href="/assets/css/gettingStarted.css">
+        <script src="/assets/script/jquery-3.2.1.min.js"></script>
+        
         
     </head>
     <body>
@@ -19,8 +21,8 @@
                     <div class="fixedWidth">
                         <div class="headsWrap">
                             <div class="topHeaderWrapper clearfix">                                
-                                <div class="logoCtn">
-                                    <h1>Logo</h1>
+                                <div class="logoCtn" style="text-align:center">
+                                    <a href="/"><h1 style="height:35px; width:100px;margin:0 auto;"><img src="/assets/images/logo.png" style="width:100%;height:35px;"></h1></a>
                                 </div>
                             </div>
                         </div>
@@ -42,7 +44,8 @@
                             <div id="SignUpWrapper">
                                 <div class="SignUpFormCtn">
                                     <h2>Sign Up</h2>
-                                    <form action="/signUp" name="signUp" method="POST">
+                                    <form action="" name="signUp">
+                                        <p id="fnd"></p>
                                         <% if( typeof(err) !== 'undefined' ) { %>
                                             <p><%- err %></p>
                                         <%}%>
@@ -83,20 +86,21 @@
                                 <div class="signInCtn">
                                     <h2>Sign In</h2>
                                     
-                                    <form action="/signIn" name="signIn" method="POST">                                       
+                                    <form action="" name="signIn" >  
+                                        <p id="ntFnd"></p>                                     
                                         <% if( typeof(err) != 'undefined' ){%>                                        
                                             <p><%=err %> Not Found</p>
                                         <%}%>
                                         <div class="InboxWrapper">
                                             <label for="email">Your email</label>
                                             <div class="InputWrapper">
-                                                <input type="email" name="email" value="" id="email" required>
+                                                <input type="email" name="email" value="" id="email1" required>
                                             </div>
                                         </div>
                                         <div class="InboxWrapper">
                                             <label for="password">Your password</label>
                                             <div class="InputWrapper">
-                                                <input type="password" name="password" value="" id="password" required>
+                                                <input type="password" name="password" value="" id="password1" required>
                                             </div>
                                         </div>
                                         <div class="InboxWrapper">                                    
@@ -118,32 +122,109 @@
                     </div>
                 </div>
             </main>    
+            <script>
+                $("#SignIn").click(function(e) { 
+                    e.preventDefault();                    
+                    if($('#email1').val() =='') {                        
+                        document.querySelector("#ntFnd").innerHTML  = "Please Enter Email Address";
+                    }  else if($('#password1').val() == '') {                        
+                        document.querySelector("#ntFnd").innerHTML  = "Please Enter Password";
+                    } else {
+                    data = {
+                        'email': $('#email1').val(),
+                        'password':$('#password1').val()
+                    };
+                    $.ajax({
+                        type: 'POST',
+                        data: JSON.stringify(data),                               
+                        contentType:'application/json',                                                                                              
+                        url: 'http://localhost:3000/signIn',                      
+                        success: function(data) {
+                            
+                            if(data == "Not Found") {                                                             
+                                document.querySelector("#ntFnd").innerHTML = "Invalid Email and Password";
+                            } else {
+                                window.location=window.location.origin + data;
+                            }                            
+                                           
+                        },
+                        error: function(error) {
+                            console.log("some error in fetching the notifications");
+                            }
+
+                    });
+                }
+                });
+            </script>
+            <script>
+                 $("#SignUp").click(function(e) { 
+                    e.preventDefault();           
+                    var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;                    
+                    if($('#fullName').val() =='') {
+                        document.querySelector("#fnd").innerHTML  = "Please Enter Your FullName";
+                    }
+                    else if($('#email').val() =='') {                        
+                        document.querySelector("#fnd").innerHTML  = "Please Enter Email Address";
+                    }  else if($('#password').val() == '') {                        
+                        document.querySelector("#fnd").innerHTML  = "Please Enter Password";
+                    } else if(!re.test($('#email').val())) {
+                        document.querySelector("#fnd").innerHTML  = "Please Enter Valid Format";
+                    }else {         
+                    data = {
+                        'fullName': $('#fullName').val(),
+                        'email': $('#email').val(),
+                        'password':$('#password').val()
+                    };
+                    $.ajax({
+                        type: 'POST',
+                        data: JSON.stringify(data),                               
+                        contentType:'application/json',                                                                                              
+                        url: 'http://localhost:3000/signUp',                      
+                        success: function(data) {                            
+                            if(data == "Found") {                                                             
+                                document.querySelector("#fnd").innerHTML = "Email Already Exist";
+                            } else {
+                                window.location=window.location.origin + data;
+                            }                                                                       
+                        },
+                        error: function(error) {
+                            console.log("some error in fetching the notifications");
+                            }
+
+                    });
+                }
+                });
+            </script>
             
-            <footer id="mainFooter">
+            <footer id="mainFooter" style="background:#111;">
                 <div class="fixedWidth">
                     <div class="footsWrap">
                         <div class="footerWrapper clearfix">
                             <div class="leftSection">
                                 <ul>
-                                    <li>All rights reserved.</li>
-                                    <li><a href="#">Terms</a></li>
-                                    <li><a href="#">About</a></li>
+                                    <li style="color:white">All rights reserved.</li>
+                                    <li><a href="#" style="color:#aaa">Terms</a></li>
+                                    <li><a href="#" style="color:#aaa">About</a></li>
                                 </ul>
                             </div>
                             <div class="rightSection">
                                 <ul>
-                                    <li><a href="https://www.facebook.com"><i class="fa fa-facebook-square" aria-hidden="true"></i></a></li>
-                                    <li><a href="https://www.twitter.com"><i class="fa fa-twitter-square" aria-hidden="true"></i></a></li>
-                                    <li><a href="https://www.youtube.com"><i class="fa fa-youtube-square" aria-hidden="true"></i></a></li>
-                                    <li><a href="https://www.instagram.com"><i class="fa fa-instagram" aria-hidden="true"></i></a></li>
-                                    <li><a href="https://www.plus.google.com"><i class="fa fa-google-plus-square" aria-hidden="true"></i></a></li>
+                                    <li><a style="color:#444;" href="https://www.facebook.com"><i class="fa fa-facebook-square" aria-hidden="true"></i></a></li>
+                                    <li><a style="color:#444;" href="https://www.twitter.com"><i class="fa fa-twitter-square" aria-hidden="true"></i></a></li>
+                                    <li><a style="color:#444;" href="https://www.youtube.com"><i class="fa fa-youtube-square" aria-hidden="true"></i></a></li>
+                                    <li><a style="color:#444;" href="https://www.instagram.com"><i class="fa fa-instagram" aria-hidden="true"></i></a></li>
+                                    <li><a style="color:#444;" href="https://www.plus.google.com"><i class="fa fa-google-plus-square" aria-hidden="true"></i></a></li>
                                 </ul>
                             </div>
-                            <div class="centerLogo">logo</div>
+                            <div class="centerLogo">                                
+                                <div class="logoCtn" style="text-align:center; z-index:10">
+                                    <a href="/"><h1 style="height:35px; width:100px;margin:0 auto;"><img src="/assets/images/logo.png" style="width:100%;height:35px;"></h1></a>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </footer><!-- ********* Footer ********** -->            
+            </footer><!-- ********* Footer ********** -->
         </div>
         <script>
                 if(window.location.origin+window.location.pathname+"#SigningIn"==window.location.href) {
