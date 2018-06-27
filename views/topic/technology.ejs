@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="en-us">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>
+            <%= name %>
+        </title>
+        <meta name="author" content="Damanvir Singh">
+        <link rel="stylesheet" href="/assets/css/font-awesome.css">
+        <link rel="stylesheet" href="/assets/css/styles.css">
+    </head>
+    <body>
+        <div id="pageCtn">
+        
+            <header id="mainHeader">
+                <div class="topHeader">
+                    <div class="fixedWidth">
+                        <div class="headsWrap">
+                            <div class="topHeaderWrapper clearfix">
+                                <div class="leftSection">
+                                </div>
+                                <div class="rightSection">
+                                    <ul class="extraNav">
+                                        <!--<li><a ><i class="fa fa-search" aria-hidden="true">
+                                            <form method="get" action="/search">
+                                                <input type="text" name="search" placeholder="enter text"/>
+                                            </form>
+                                        </i></a>-->
+                                        <% if( typeof(someAttribute) !== 'undefined' ) { %>
+                                            <li><a id="namePerson" href="/enter"><%=someAttribute%></a>
+                                                <ul class="submenu">
+                                                    <li><a href="/enter">Create a Blog</a></li>
+                                                    <li><a href="/profile">Edit Your Profile</a></li>
+                                                    <li><a href="/blog/<%= userId %>">Your Stories</a></li>
+                                                </ul>
+                                            </li>
+                                            <li style="display:none"><%=userId%></li>
+                                            <li><a href="logout">Logout</a></li>
+                                        <%}else{%>
+                                        <li><a href="/GettingStarted/#SigningIn" class="signin">Sign in</a></li>
+                                        <li class="signUpPage"><a href="/GettingStarted">Get Started</a></li>
+                                        <%}%>
+                                    </ul>
+                                </div>                                
+
+                                <div class="logoCtn" style="text-align:center">
+                                        <a href="/"><h1 style="height:35px; width:100px;margin:0 auto;"><img src="/assets/images/logo.png" style="width:100%;height:35px;"></h1></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="navCtn">
+                    <div class="fixedWidth">
+                        <nav>
+                            <ul>
+                                <li><a href="/">Home</a></li>
+                                <li><a href="/topic/technology">Technology</a></li>
+                                <li><a href="/topic/creativity">Creativity</a></li>
+                                <li><a href="/topic/entrepreneurship">Entrepreneurship</a></li>
+                                <li><a href="/topic/stories">Real Stories</a></li>
+                                <li><a href="/topic/design">Digital Design</a></li>                                
+                            </ul>
+                        </nav>
+                    </div>
+                </div>
+            </header><!-- ********* Header *********** -->
+
+
+            <main>
+                <div id="pageSectionHeads" style="background:linear-gradient(0deg, rgba(1,1,1,.3) 40%,rgba(1,1,1,.3) 60%),url('/assets/images/<%=name%>.png');background-size:100% auto;background-position:left center;">
+                    <div class="fixedWidth">
+                        <div class="pageSectionHeadCtn">
+                            <div class="pageSectionElementWrapper clearfix">
+                                <div class="pageSectionH2">
+                                    <h2 style="text-transform:capitalize;color:white"><%= name %></h2>
+                                    <div class="relatedTopic">
+                                        <p>
+                                            
+                                        </p>
+                                    </div>
+                                </div>                                
+                            </div>                            
+                        </div>
+                    </div>
+                </div><!-- ********* Popular Articles ********** -->
+
+                <div id="popularArticles" >
+                   <div class="fixedWidth">
+                        <div class="popularArticlesWrapper">
+                            <header class="tagging clearfix">
+                                    <h2>See What is Happening <span style="text-transform:capitalize;"><%=name %></span> World</h2>
+                                    <div class="viewMore">                            
+                                    </div>
+                            </header>
+                            <div class="ArticlesWrapperCtn clearfix">                                
+                                                                                           
+                                <% for (var h =0;h<user.length;h++) { %>
+                                    <% for(var o = 0; o<user1.length;o++) {%>                                            
+                                        <% if (user1[o]._id == user[h].CreatorId)  {%>
+                                        <% var da =user[h].content.bodyModel.dataIt %>                                                                                        
+                                        <% if (user[h].content.bodyModel.dataIt.length>2) {%>
+                                            
+                                    <div class="leftSection Arti1Grp"> 
+                                   
+                                        <div class="popularArti1 clearfix">
+                                        
+                                            <div class="leftSection">
+                                                    
+                                                <a href="/self/<%= user[h]._id %>" style="display:block;width:100%;height:100%;background-image:url('<%= user[h].featuresImage %>');background-size:auto 100%;background-position:center;background-repeat: no-repeat;"></a>                        
+                                            </div>
+                                            <div class="rightSection">
+                                                <div class="rightSecSupport">
+                                                    <a href="/self/<%= user[h]._id %>">
+                                                    <h3 class="head3"><%= user[h].title %></h3>
+                                                    <% var flag = true; %>                                                    
+                                                    <% for(var i=0;i<da.length;i++) {%>                                                                                                    
+                                                        
+                                                        <%if(flag) {%>
+                                                        <% for (var key=0;key<1;key++) { %>                                                                                                                
+                                                            <% if(da[i][key].tag == 'p') {%>
+                                                            <p class="paraCnt">                                                                
+                                                                <% var content =da[i][key].tagContent.substr(0, 90); %>
+                                                                <% if(da[i][key].tagContent.length>8) {%>
+                                                                    <%- content %>...                        
+                                                                <%}else{%> 
+                                                                <%- content %>
+                                                                <%}%>
+                                                            </p>
+                                                            <% flag=false; %>
+                                                        <%}%>
+                                                    <%}%>
+                                                    <%}%><%}%>
+                                                    </a>
+                                                    <div class="AuthorInfo clearfix">
+                                                        <div class="leftSection authorImage">
+                                                            <div class="authorImageCtn">
+                                                                <a href="/blog/<%= user[h].CreatorId %>"><img src="<%= user1[o].imageId  %>"></a>
+                                                            </div>
+                                                        </div>
+                                                        <div class="leftSection authorName">
+                                                            <p id="personN">by <a href="/blog/<%= user[h].CreatorId %>"> <%= user1[o].fullName  %></a></p>
+                                                            <p id="date"><%= user[h].CreatingDate.toDateString() %></p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>      
+                                                                                                                           
+                                        </div>
+                                    </div>
+                                    <%}%>
+                                <%}%>
+                                <%}%>                                        
+                                <%}%>                           
+                            <!--
+                                <div class="leftSection Arti2Grp">                            
+                                    <div class="popularArti2 clearfix">
+                                        <div class="leftSection">
+
+                                        </div>
+                                        <div class="rightSection">
+                                            <div class="rightSecSupport">
+                                                <h3>The 4 red flags I missed as the Startup imploaded around me</h3>
+                                                <p>
+                                                    It began in a coffee shop interview and ended in a high-speed motorcycle chase. Come with me if you want your 
+                                                </p>
+                                                <div class="AuthorInfo clearfix">
+                                                    <div class="leftSection authorImage">
+                                                        <div class="authorImageCtn">
+                                                            <img src="/assets/images/mountain1.jpg">
+                                                        </div>
+                                                    </div>
+                                                    <div class="leftSection authorName">
+                                                        <p><a href="#">by Damanvir Singh</a></p>
+                                                        <p>Nov 1</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="leftSection Arti1Grp">                            
+                                    <div class="popularArti3 clearfix">
+                                        <div class="leftSection">
+
+                                        </div>
+                                        <div class="rightSection">
+                                            <div class="rightSecSupport">
+                                                <h3>The 4 red flags I missed as the Startup imploaded around me</h3>
+                                                <p>
+                                                    It began in a coffee shop interview and ended in a high-speed motorcycle chase. Come with me if you want your 
+                                                </p>
+                                                <div class="AuthorInfo clearfix">
+                                                    <div class="leftSection authorImage">
+                                                        <div class="authorImageCtn">
+                                                            <img src="/assets/images/mountain1.jpg">
+                                                        </div>
+                                                    </div>
+                                                    <div class="leftSection authorName">
+                                                        <p><a href="#">by Damanvir Singh</a></p>
+                                                        <p>Nov 1</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>    
+                                </div>
+                                <div class="leftSection Arti2Grp">                            
+                                    <div class="popularArti4 clearfix">
+                                        <div class="leftSection">
+
+                                        </div>
+                                        <div class="rightSection">
+                                            <div class="rightSecSupport">
+                                                <h3>The 4 red flags I missed as the Startup imploaded around me</h3>
+                                                <p>
+                                                    It began in a coffee shop interview and ended in a high-speed motorcycle chase. Come with me if you want your 
+                                                </p>
+                                                <div class="AuthorInfo clearfix">
+                                                    <div class="leftSection authorImage">
+                                                        <div class="authorImageCtn">
+                                                            <img src="/assets/images/mountain1.jpg">
+                                                        </div>
+                                                    </div>
+                                                    <div class="leftSection authorName">
+                                                        <p><a href="#">by Damanvir Singh</a></p>
+                                                        <p>Nov 1</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>  
+                                </div>-->
+                            </div>
+                        </div>
+                   </div>                   
+                </div><!-- ********* Popular Articles ********** -->
+                
+                
+            </main>    
+            
+            <footer id="mainFooter">
+                <div class="fixedWidth">
+                    <div class="footsWrap">
+                        <div class="footerWrapper clearfix">
+                            <div class="leftSection">
+                                <ul>
+                                    <li>All rights reserved.</li>
+                                    <li><a href="#">Terms</a></li>
+                                    <li><a href="#">About</a></li>
+                                </ul>
+                            </div>
+                            <div class="rightSection">
+                                <ul>
+                                    <li><a href="https://www.facebook.com"><i class="fa fa-facebook-square" aria-hidden="true"></i></a></li>
+                                    <li><a href="https://www.twitter.com"><i class="fa fa-twitter-square" aria-hidden="true"></i></a></li>
+                                    <li><a href="https://www.youtube.com"><i class="fa fa-youtube-square" aria-hidden="true"></i></a></li>
+                                    <li><a href="https://www.instagram.com"><i class="fa fa-instagram" aria-hidden="true"></i></a></li>
+                                    <li><a href="https://www.plus.google.com"><i class="fa fa-google-plus-square" aria-hidden="true"></i></a></li>
+                                </ul>
+                            </div>
+                            <div class="centerLogo">logo</div>
+                        </div>
+                    </div>
+                </div>
+            </footer><!-- ********* Footer ********** -->
+            
+        </div>
+    </body>
+</html>

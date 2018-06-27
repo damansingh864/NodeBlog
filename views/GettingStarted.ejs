@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en-us">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>
+            Blogging Sites
+        </title>
+        <meta name="author" content="Damanvir Singh">
+        <link rel="stylesheet" href="/assets/css/font-awesome.css">
+        <link rel="stylesheet" href="/assets/css/styles.css">
+        <link rel="stylesheet" href="/assets/css/gettingStarted.css">
+        
+    </head>
+    <body>
+        <div id="pageCtn">                
+            <header id="mainHeader">
+                <div class="topHeader">
+                    <div class="fixedWidth">
+                        <div class="headsWrap">
+                            <div class="topHeaderWrapper clearfix">                                
+                                <div class="logoCtn">
+                                    <h1>Logo</h1>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>               
+            </header><!-- ********* Header *********** -->
+
+            <main>
+                <div class="fixedWidth">
+                    <div id="JoinCtn">
+                        <div class="JoinWrapper">
+                            <h1>Join Website</h1>
+                            <div class="JoinIntroContent">
+                                <p class="JoinTextCtn">
+                                    Create an account to personalize your homepage, follow your favorite authors and publications, applaud stories you love, and more.
+                                </p>
+                            </div>  
+
+                            <div id="SignUpWrapper">
+                                <div class="SignUpFormCtn">
+                                    <h2>Sign Up</h2>
+                                    <form action="/signUp" name="signUp" method="POST">
+                                        <% if( typeof(err) !== 'undefined' ) { %>
+                                            <p><%- err %></p>
+                                        <%}%>
+                                        <div class="InboxWrapper">
+                                            <label for="fullName">Your full name</label>
+                                            <div class="InputWrapper">
+                                                <input type="text" name="fullName" value="" id="fullName" autofocus  required>
+                                            </div>
+                                        </div>
+                                        <div class="InboxWrapper">
+                                            <label for="email">Your email</label>
+                                            <div class="InputWrapper">
+                                                <input type="email" name="email" value="" id="email" required>
+                                            </div>
+                                        </div>
+                                        <div class="InboxWrapper">
+                                            <label for="password">Your password</label>
+                                            <div class="InputWrapper">
+                                                <input type="password" name="password" value="" id="password" required>
+                                            </div>
+                                        </div>
+                                        <div class="InboxWrapper">                                    
+                                            <div class="SignUpBtn">
+                                                <button type="submit" id="SignUp">Create account</button>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                                <div class="signInLink">
+                                    <p>Already have an account? <a href="#SigningIn" id="SigningIn">Sign in</a>.</p>
+                                </div>
+                                <div class="acceptingTermsWrap">
+                                    <p>By creating an account, I accept Medium’s Terms of Service.</p>
+                                </div>
+                            </div>
+
+                            <div id="SignInWrapper">
+                                <div class="signInCtn">
+                                    <h2>Sign In</h2>
+                                    
+                                    <form action="/signIn" name="signIn" method="POST">                                       
+                                        <% if( typeof(err) != 'undefined' ){%>                                        
+                                            <p><%=err %> Not Found</p>
+                                        <%}%>
+                                        <div class="InboxWrapper">
+                                            <label for="email">Your email</label>
+                                            <div class="InputWrapper">
+                                                <input type="email" name="email" value="" id="email" required>
+                                            </div>
+                                        </div>
+                                        <div class="InboxWrapper">
+                                            <label for="password">Your password</label>
+                                            <div class="InputWrapper">
+                                                <input type="password" name="password" value="" id="password" required>
+                                            </div>
+                                        </div>
+                                        <div class="InboxWrapper">                                    
+                                            <div class="SignInBtn">
+                                                <button type="submit" id="SignIn">Sign In</button>
+                                            </div>
+                                        </div>
+                                    </form>                                    
+                                </div>
+                                <div class="signUpLink">
+                                    <p>Are you new to Medium? <a href="#" id="SigningUp">Sign up</a>.</p>
+                                </div>                     
+                                <div class="acceptingTermsWrap">
+                                    <p>Terms of Service.</p>
+                                </div>           
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </main>    
+            
+            <footer id="mainFooter">
+                <div class="fixedWidth">
+                    <div class="footsWrap">
+                        <div class="footerWrapper clearfix">
+                            <div class="leftSection">
+                                <ul>
+                                    <li>All rights reserved.</li>
+                                    <li><a href="#">Terms</a></li>
+                                    <li><a href="#">About</a></li>
+                                </ul>
+                            </div>
+                            <div class="rightSection">
+                                <ul>
+                                    <li><a href="https://www.facebook.com"><i class="fa fa-facebook-square" aria-hidden="true"></i></a></li>
+                                    <li><a href="https://www.twitter.com"><i class="fa fa-twitter-square" aria-hidden="true"></i></a></li>
+                                    <li><a href="https://www.youtube.com"><i class="fa fa-youtube-square" aria-hidden="true"></i></a></li>
+                                    <li><a href="https://www.instagram.com"><i class="fa fa-instagram" aria-hidden="true"></i></a></li>
+                                    <li><a href="https://www.plus.google.com"><i class="fa fa-google-plus-square" aria-hidden="true"></i></a></li>
+                                </ul>
+                            </div>
+                            <div class="centerLogo">logo</div>
+                        </div>
+                    </div>
+                </div>
+            </footer><!-- ********* Footer ********** -->            
+        </div>
+        <script>
+                if(window.location.origin+window.location.pathname+"#SigningIn"==window.location.href) {
+                    document.querySelector("#SignInWrapper").style.display="block";
+                    document.querySelector("#SignUpWrapper").style.display="none";                
+                }
+                
+        </script>
+        <script>
+            
+            var signUp = document.querySelector("#SigningUp");
+            var signIn = document.querySelector("#SigningIn");            
+            
+            signIn.addEventListener("click", function() {                                
+                    document.querySelector("#SignInWrapper").style.display="block";
+                    document.querySelector("#SignUpWrapper").style.display="none";                
+            });
+
+            signUp.addEventListener("click", function() {
+                
+                document.querySelector("#SignInWrapper").style.display="none";
+                document.querySelector("#SignUpWrapper").style.display="block";
+            });
+        
+        </script>
+    </body>
+</html>

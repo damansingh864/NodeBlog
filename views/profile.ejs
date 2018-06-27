@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en-us">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>
+            
+        </title>
+        <meta name="author" content="Damanvir Singh">
+        <link rel="stylesheet" href="/assets/css/font-awesome.css">
+        <link rel="stylesheet" href="/assets/css/styles.css">
+        <script src="/assets/script/jquery-3.2.1.min.js"></script>
+    </head>
+    <body>
+        <div id="pageCtn">
+            <header id="mainHeader">
+                <header id="mainHeader">
+                    <div class="topHeader">
+                        <div class="fixedWidth">
+                            <div class="headsWrap">
+                                <div class="topHeaderWrapper clearfix">
+                                    <div class="leftSection">
+                                    </div>
+                                    <div class="rightSection">
+                                        <ul class="extraNav">
+                                            <!--<li><a ><i class="fa fa-search" aria-hidden="true">
+                                                <form method="get" action="/search">
+                                                    <input type="text" name="search" placeholder="enter text"/>
+                                                </form>
+                                            </i></a>-->
+                                            <% if( typeof(someAttribute) !== 'undefined' ) { %>
+                                                <li><a id="namePerson" href="/enter"><%=someAttribute%></a>
+                                                    <ul class="submenu">
+                                                        <li><a href="/enter">Create a Blog</a></li>
+                                                        <li><a href="/profile">Edit Your Profile</a></li>
+                                                        <li><a href="/blog/<%= userId %>">Your Stories</a></li>
+                                                    </ul>
+                                                </li>
+                                                <li style="display:none"><%=userId%></li>
+                                                <li><a href="logout">Logout</a></li>
+                                            <%}else{%>
+                                            <li><a href="GettingStarted/#SigningIn" class="signin">Sign in</a></li>
+                                            <li class="signUpPage"><a href="GettingStarted">Get Started</a></li>
+                                            <%}%>
+                                        </ul>
+                                    </div>                                
+    
+                                    <div class="logoCtn" style="text-align:center">
+                                            <a href="/"><h1 style="height:35px; width:100px;margin:0 auto;"><img src="/assets/images/logo.png" style="width:100%;height:35px;"></h1></a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="navCtn">
+                        <div class="fixedWidth">
+                            <nav>
+                                <ul>
+                                    <li><a href="/">Home</a></li>
+                                    <li><a href="/topic/technology">Technology</a></li>
+                                    <li><a href="/topic/creativity">Creativity</a></li>
+                                    <li><a href="/topic/entrepreneurship">Entrepreneurship</a></li>
+                                    <li><a href="/topic/stories">Real Stories</a></li>
+                                    <li><a href="/topic/design">Digital Design</a></li>                                
+                                </ul>
+                            </nav>
+                        </div>
+                    </div>
+                </header><!-- ********* Header *********** -->
+
+            <main>
+                <article style="width:740px; margin:0 auto;">
+                    <div class="profileWrapper">
+                        <div class="profileDataWrapper">
+                            <header class="headerWrapperProfile clearfix">
+                                <div class="leftSection">
+                                    <h1 class="nameProfilePerson"><%= someAttribute %></h1>
+                                    <p class="bioProfilePerson"><% if (typeof(bio) !== 'undefined' ) {%><%=bio%><%}%></p>
+                                </div>
+                                <div class="rightSection clearfix">
+                                    <div class="imageWrapperProfile">
+                                        <div class="imageCtnPersons">
+                                            <img src="<%= image %>" id="PrfImagePrev" style="height:100%;width:100%">
+                                        </div>
+                                        <div class="buttonUploadProfileImage">
+                                            <button type="button" id="uploadBtnWrap" title="Upload an Image"><i style=" color:#aaa; opacity:.6" class="fa fa-2x fa-camera" aria-hidden="true"></i></button>
+                                            <input type="file" id="imageProfUpl" accept="image/*" title="Upload an Image" style="display:none">
+                                            
+                                        </div>
+                                       
+                                    </div>
+                                </div>
+                            </header>
+                            <div class="profileSaveEditBtn">
+                                <div id="EditBtnWrapper">
+                                    <button id="EditBtnProfile" type="button">Edit</button>
+                                </div>
+                                <div id="SaveAndCancelWrapper">
+                                    <button id="saveBtnProfile" type="button">Save</button>
+                                    <button id="CancelBtnProfile" type="button">Cancel</button> 
+                                </div>
+                            </div>
+                            <script>
+                                var SaveBtn = document.querySelector("#saveBtnProfile");
+                                SaveBtn.addEventListener("click", function() {
+                                    
+                                    var personName = document.querySelector("#pers").value;
+                                    var bioPerson = document.querySelector("#textBio").value;
+                                    var ImagePers = document.querySelector("#PrfImagePrev").getAttribute("src");
+                                    
+                                    
+                                    $.ajax({
+                                        type: 'POST',
+                                        data: JSON.stringify({
+                                            fullName:personName,
+                                            bio:bioPerson,
+                                            imageId:ImagePers
+                                        }),                               
+                                        contentType:'application/json',                          
+                                        //enctype: 'multipart/form-data',
+                                        url: 'http://localhost:3000/update',                            
+                                        success: function(data)
+                                        {
+                                 
+                                            location.reload();
+                                            console.log("Working");
+                                        }
+                                    });
+                                
+
+                                });
+                            </script>
+                            <script>
+                                var EditBtn= document.querySelector("#EditBtnProfile");
+                                var EditWrapper = document.querySelector("#EditBtnWrapper");
+                                var SaveWrapper = document.querySelector("#SaveAndCancelWrapper");
+                                var UploadProfileImage = document.querySelector(".buttonUploadProfileImage");
+                                var NamePerson = document.querySelector(".nameProfilePerson");
+                                var BioPerson = document.querySelector(".bioProfilePerson");
+                                var PrfImgPrev = document.querySelector("#PrfImagePrev");
+                                var imgPrev = PrfImgPrev.getAttribute("src");
+                                
+                                console.log("da");
+                                var Persons,Bio;
+                                EditBtn.addEventListener("click", function() {                                    
+                                    Persons = NamePerson.innerHTML;
+                                    Bio = BioPerson.innerHTML;
+                                    NamePerson.innerHTML = "<input type='text' id='pers' value="+Persons+">";
+                                    BioPerson.innerHTML = "<textarea id='textBio' autofocus style='width:100%;height:60px'>"+Bio+"</textarea>";                                    
+                                    EditWrapper.style.display="none";
+                                    SaveWrapper.style.display="block";
+                                    UploadProfileImage.style.display="block";
+                                });
+                                var CancelBtn =  document.querySelector("#CancelBtnProfile");
+                                
+
+                                CancelBtn.addEventListener("click", function() {
+                                    NamePerson.innerHTML = Persons;
+                                    BioPerson.innerHTML = Bio;                                    
+                                    PrfImgPrev.setAttribute("src",imgPrev);                                    
+                                    SaveWrapper.style.display="none";
+                                    EditWrapper.style.display="block";
+                                    UploadProfileImage.style.display="none";
+                                });
+
+                            </script>
+                        </div>
+                    </div>                    
+                </article>                
+            </main>    
+            
+            <footer id="mainFooter">
+                <div class="fixedWidth">
+                    <div class="footsWrap">
+                        <div class="footerWrapper clearfix">
+                            <div class="leftSection">
+                                <ul>
+                                    <li>All rights reserved.</li>
+                                    <li><a href="#">Terms</a></li>
+                                    <li><a href="#">About</a></li>
+                                </ul>
+                            </div>
+                            <div class="rightSection">
+                                <ul>
+                                    <li><a href="https://www.facebook.com"><i class="fa fa-facebook-square" aria-hidden="true"></i></a></li>
+                                    <li><a href="https://www.twitter.com"><i class="fa fa-twitter-square" aria-hidden="true"></i></a></li>
+                                    <li><a href="https://www.youtube.com"><i class="fa fa-youtube-square" aria-hidden="true"></i></a></li>
+                                    <li><a href="https://www.instagram.com"><i class="fa fa-instagram" aria-hidden="true"></i></a></li>
+                                    <li><a href="https://www.plus.google.com"><i class="fa fa-google-plus-square" aria-hidden="true"></i></a></li>
+                                </ul>
+                            </div>
+                            <div class="centerLogo">logo</div>
+                        </div>
+                    </div>
+                </div>
+            </footer><!-- ********* Footer ********** -->
+            
+        </div>
+        <script>
+                var fileUp = document.querySelector("#uploadBtnWrap");                                                
+                var sd = document.querySelector("#imageProfUpl");
+                var PrfPrev = document.querySelector("#PrfImagePrev");
+
+                fileUp.addEventListener("click", function () {                                
+                        sd.click();                            
+                        console.log("click");                                
+                });
+                sd.addEventListener("change", function() {
+                    var curFiles = sd.files;                                                                                                         
+
+                    for(var i = 0; i < curFiles.length; i++) {
+                        var reader = new FileReader();
+                            if(validFileType(curFiles[i])) {                  
+                
+                                reader.onload = function()
+                                {                                                            
+                                    
+                                    PrfPrev.src=reader.result                                                                                                                                                                                                    
+                                }
+                                reader.readAsDataURL(curFiles[i]);             
+                            }
+                    }                                        
+                function validFileType(file) {
+                    var fileTypes = [
+                        'image/jpeg',
+                        'image/pjpeg',
+                        'image/png'
+                    ];
+                    for(var i = 0; i < fileTypes.length; i++) {
+                        if(file.type === fileTypes[i]) {
+                            return true;
+                        }
+                    }
+                    return false;
+                }    
+            });                                                                                       
+        </script>
+    </body>
+</html>
